@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PromoZip - Codes promo, YouTube et bons plans</title>
+<meta name="description" content="PromoZip rassemble les codes promo vus sur le web et dans les vidéos YouTube, classés par catégorie : VPN, mode, livraison, Black Friday, jeux concours.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PromoZip - Codes promo, YouTube et bons plans">
+<meta property="og:description" content="Tous les codes promo au même endroit, classés par catégorie.">
+<meta name="theme-color" content="#2B1B8C">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@500&display=swap">
+<style id="app-css">
+/* Layout: hero with logo + filter chips + ticket-shaped coupon cards; owner-only admin panel (floating button) */
+:root{
+  --bg:#EEEAFF; --surface:#FFFFFF; --ink:#1A1240; --muted:#5E5890; --line:#D8D2F5;
+  --hero:#2B1B8C; --hero-ink:#FFFFFF; --accent:#FFD23F; --accent-ink:#1A1240;
+  --ok-bg:#D6F5E3; --ok:#0B6B3A; --warn-bg:#FFE9B8; --warn:#7A4A00; --deal-bg:#DDE8FF; --deal:#1D3FA8; --danger:#C81E4A;
+  --display:'Bricolage Grotesque','Arial Black',system-ui,sans-serif;
+  --text:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'DM Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#120D2B; --surface:#1E1745; --ink:#F1EEFF; --muted:#A9A3D6; --line:#352C6B;
+  --hero:#3B28C9; --ok-bg:#123A28; --ok:#7CE3A9; --warn-bg:#3F2C06; --warn:#FFD27A; --deal-bg:#172A63; --deal:#A9C2FF; --danger:#FF7A93;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#120D2B; --surface:#1E1745; --ink:#F1EEFF; --muted:#A9A3D6; --line:#352C6B;
+  --hero:#3B28C9; --ok-bg:#123A28; --ok:#7CE3A9; --warn-bg:#3F2C06; --warn:#FFD27A; --deal-bg:#172A63; --deal:#A9C2FF; --danger:#FF7A93;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--text);font-size:15px;line-height:1.5;
+  padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.hero{background:var(--hero);color:var(--hero-ink);border-radius:28px;padding:26px 24px 26px;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;gap:14px}
+.hero::before{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,var(--accent) 0 38%,transparent 39%);opacity:.18}
+.hero::after{content:"";position:absolute;left:-40px;bottom:-70px;width:200px;height:200px;border-radius:50%;
+  border:26px solid #fff;opacity:.08}
+.hero>*{position:relative;z-index:1}
+.brandrow{display:flex;align-items:center;gap:12px}
+.logo{width:58px;height:52px;flex:none;display:block}
+.logo svg,.logo img{width:100%;height:100%;object-fit:contain;display:block}
+.brand{font:800 26px/1 var(--display);letter-spacing:-.01em}
+.hero h1{font-size:clamp(38px,9vw,72px);line-height:.95;font-weight:800;letter-spacing:-.02em;max-width:14ch}
+.hero h1 em{font-style:normal;background:var(--accent);color:var(--accent-ink);padding:0 .14em;border-radius:.14em;
+  display:inline-block;transform:rotate(-2deg)}
+.hero p{margin:0;max-width:52ch;font-size:16px;opacity:.92}
+.hero-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.sticker{background:var(--accent);color:var(--accent-ink);font:800 15px/1.1 var(--display);padding:10px 14px;border-radius:12px;
+  transform:rotate(-3deg);box-shadow:3px 3px 0 rgba(0,0,0,.28)}
+.stat{font-size:13px;font-weight:700;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.16)}
+
+.tools{display:flex;flex-direction:column;gap:12px}
+.search{width:100%;font:500 16px var(--text);color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:12px 14px}
+.search::placeholder{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:700 13px var(--text);color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:999px;padding:8px 13px;cursor:pointer;
+  display:inline-flex;gap:7px;align-items:center}
+.chip i{width:10px;height:10px;border-radius:50%;background:var(--cat,var(--ink));display:inline-block}
+.chip b{font-weight:700;color:var(--muted);font-size:12px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip[aria-pressed="true"] b{color:var(--bg);opacity:.75}
+.only{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--muted);font-weight:500}
+.only input{width:18px;height:18px;accent-color:#4F46E5}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:16px}
+.ticket{display:grid;grid-template-columns:78px minmax(0,1fr);background:var(--surface);border:1px solid var(--line);border-radius:18px;
+  position:relative;overflow:hidden;box-shadow:0 3px 0 var(--line)}
+.ticket::before,.ticket::after{content:"";position:absolute;left:78px;margin-left:-9px;width:18px;height:18px;border-radius:50%;background:var(--bg)}
+.ticket::before{top:-9px}.ticket::after{bottom:-9px}
+.stub{background:var(--cat);color:#fff;border-right:2px dashed rgba(255,255,255,.6);display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:8px;padding:14px 6px;text-align:center;min-width:0}
+.mono{font:800 32px/1 var(--display)}
+.catl{font:700 10px/1.15 var(--text);letter-spacing:.07em;text-transform:uppercase;opacity:.92;overflow-wrap:anywhere}
+.tbody{padding:14px 16px 16px;display:flex;flex-direction:column;gap:9px;min-width:0}
+.tbody h3{font-size:20px;line-height:1.15;overflow-wrap:anywhere}
+.tbody p{margin:0;color:var(--muted);font-size:14px;overflow-wrap:anywhere}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px;color:var(--muted)}
+.pill{font-weight:700;font-size:11px;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:999px}
+.pill.verified{background:var(--ok-bg);color:var(--ok)}
+.pill.check{background:var(--warn-bg);color:var(--warn)}
+.pill.deal{background:var(--deal-bg);color:var(--deal)}
+.meta a{font-weight:700;color:var(--ink)}
+.codebtn{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;font:inherit;color:var(--ink);cursor:pointer;
+  background:var(--bg);border:2px dashed var(--cat);border-radius:12px;padding:10px 12px;text-align:left}
+.codetext{font:500 18px var(--mono);letter-spacing:.04em;overflow-wrap:anywhere;user-select:all}
+.copy{font:700 12px var(--text);background:var(--cat);color:#fff;border-radius:8px;padding:6px 10px;white-space:nowrap}
+.go{align-self:flex-start;font:700 14px var(--text);text-decoration:none;color:#fff;background:var(--cat);border-radius:10px;padding:9px 14px}
+.empty{grid-column:1/-1;background:var(--surface);border:2px dashed var(--line);border-radius:18px;padding:28px 20px;text-align:center;color:var(--muted)}
+.empty h3{color:var(--ink);margin-bottom:6px;font-size:20px}
+.foot{font-size:13px;color:var(--muted);max-width:70ch;margin:0}
+
+/* ---------- Admin ---------- */
+.fab{position:fixed;z-index:40;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));
+  display:inline-flex;align-items:center;gap:8px;font:800 14px var(--display);color:var(--accent-ink);background:var(--accent);
+  border:2px solid var(--ink);border-radius:999px;padding:11px 16px;cursor:pointer;box-shadow:3px 3px 0 var(--ink)}
+.fab svg{width:18px;height:18px}
+.fab .dot{width:10px;height:10px;border-radius:50%;background:var(--danger);border:2px solid var(--accent-ink)}
+.panel{position:fixed;inset:0;z-index:60;background:var(--bg);display:flex;flex-direction:column;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.p-head{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;justify-content:space-between;background:var(--ink);color:var(--bg);
+  padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.p-head h2{font-size:20px;display:flex;align-items:center;gap:10px}
+.p-head h2 .logo{width:34px;height:30px}
+.p-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.status{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--ok-bg);color:var(--ok)}
+.status.dirty{background:var(--warn-bg);color:var(--warn)}
+.tabs{display:flex;gap:6px;overflow-x:auto;border-bottom:2px solid var(--line);background:var(--surface);
+  padding:8px max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+.tab{font:700 14px var(--text);color:var(--muted);background:none;border:0;border-bottom:4px solid transparent;padding:10px 14px;cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.p-body{flex:1;overflow-y:auto;overscroll-behavior:contain;padding-block:18px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.p-inner{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.ad-msg{font-size:14px;font-weight:700;min-height:20px;margin:0}
+.ad-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.ad-bar .grow{flex:1 1 200px;min-width:0}
+.ad-list{display:flex;flex-direction:column;gap:10px}
+.ad-row{display:grid;grid-template-columns:14px minmax(0,1fr);gap:8px 12px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px}
+.ad-row.off{opacity:.62}
+.ad-dot{width:14px;height:14px;border-radius:50%;margin-top:4px}
+.ad-main{min-width:0;display:flex;flex-direction:column;gap:4px}
+.ad-main strong{font-size:15px;overflow-wrap:anywhere}
+.ad-main .c{font:500 14px var(--mono);overflow-wrap:anywhere}
+.ad-main .d{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.ad-tags{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ad-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px}
+.ab{font:700 13px var(--text);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:7px 11px;cursor:pointer}
+.ab:disabled{opacity:.45;cursor:not-allowed}
+.ab.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--ink)}
+.ab.danger{color:var(--danger);border-color:var(--danger)}
+.ab.solid{background:var(--hero);color:#fff;border-color:var(--hero)}
+.p-head .ab{background:transparent;color:var(--bg);border-color:rgba(255,255,255,.45)}
+.p-head .ab.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.p-head .ab:disabled{opacity:.4}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:14px}
+.card h3{font-size:18px}
+.card p{margin:0;color:var(--muted);font-size:14px}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px}
+.field{display:flex;flex-direction:column;gap:5px;min-width:0}
+.field.wide{grid-column:1/-1}
+.field label{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.field input[type=text],.field input[type=url],.field input[type=search],.field select,.field textarea,.search2{font:500 16px var(--text);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}
+.field textarea{min-height:76px;resize:vertical}
+.checks{display:flex;flex-wrap:wrap;gap:18px}
+.checks label{display:flex;gap:8px;align-items:center;font-size:14px;font-weight:500;text-transform:none;letter-spacing:0;color:var(--ink)}
+.checks input{width:18px;height:18px;accent-color:#4F46E5}
+.swatch{width:30px;height:30px;border-radius:50%;border:3px solid var(--surface);outline:2px solid var(--line);cursor:pointer;padding:0}
+.palette{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px}
+.palette .swatch[aria-pressed="true"]{outline:3px solid var(--ink)}
+.cat-row{grid-template-columns:34px minmax(0,1fr)}
+.cat-row .nm{width:100%;font:700 16px var(--text);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:8px 10px}
+.logo-prev{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-prev .logo{width:92px;height:82px;background:var(--hero);border-radius:16px;padding:8px}
+.help li{margin-bottom:8px}
+.login-back{position:fixed;inset:0;z-index:80;background:rgba(18,13,43,.72);display:flex;align-items:center;justify-content:center;
+  padding:16px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}
+.login{background:var(--surface);color:var(--ink);border:2px solid var(--ink);border-radius:22px;padding:22px;width:100%;max-width:380px;display:flex;flex-direction:column;gap:14px;box-shadow:6px 6px 0 var(--accent)}
+.login .logo{width:64px;height:58px}
+.login h2{font-size:24px}
+.login p{margin:0;color:var(--muted);font-size:14px}
+.login .field input{font:500 16px var(--text);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}
+.login-row{display:flex;gap:8px;flex-wrap:wrap}
+@media (max-width:480px){.hero{padding:22px 18px}.ticket{grid-template-columns:68px minmax(0,1fr)}.ticket::before,.ticket::after{left:68px}.mono{font-size:26px}.brand{font-size:22px}}
+@media (prefers-reduced-motion:no-preference){.chip,.btn,.codebtn,.go,.fab{transition:transform .12s}.chip:hover,.codebtn:hover,.go:hover,.fab:hover{transform:translateY(-2px)}}
+</style>
+</head>
+<body>
+
+
+<div id="shell">
+<div class="wrap">
+  <header class="hero">
+    <div class="brandrow"><span class="logo" id="logo"></span><span class="brand" id="brand"></span></div>
+    <h1><span id="h-a"></span> <em id="h-b"></em></h1>
+    <p id="intro"></p>
+    <div class="hero-row">
+      <div class="sticker" id="countdown"></div>
+      <div class="stat" id="stat-codes">0 codes</div>
+      <div class="stat" id="stat-deals">0 bons plans</div>
+    </div>
+  </header>
+
+  <section class="tools" aria-label="Recherche et catégories">
+    <input class="search" id="q" type="search" placeholder="Chercher une marque, un code…" aria-label="Chercher un code">
+    <div class="chips" id="chips"></div>
+    <label class="only"><input type="checkbox" id="only-codes"> Afficher seulement les vrais codes</label>
+  </section>
+
+  <main class="grid" id="grid" aria-live="polite"></main>
+
+  <p class="foot" id="foot"></p>
+</div>
+</div>
+
+<script type="application/json" id="state">{"site":{"name":"PromoZip","heroA":"Tous les codes promo,","heroB":"au même endroit","intro":"Codes vus sur le web et dans les vidéos YouTube, rangés par catégorie. Touche un code pour le copier, puis colle-le au paiement.","sticker":"","footer":"Les codes changent vite et peuvent expirer sans prévenir : teste-les au moment du paiement. PromoZip n'est affilié à aucune de ces marques.","updated":"19 novembre 2026","logo":""},"auth":{"salt":"pl1","h":"db0f4a16232d778e28f085213490a26af6b8ccda55027e3e04188472a2f8624c"},"cats":[{"k":"event","l":"Black Friday","c":"#0F766E"},{"k":"vpn","l":"VPN & Tech","c":"#4F46E5"},{"k":"youtube","l":"YouTubeurs","c":"#E11D48"},{"k":"food","l":"Repas & Livraison","c":"#C2570C"},{"k":"mode","l":"Mode & Beauté","c":"#C026A3"},{"k":"shop","l":"Shopping & Cashback","c":"#15803D"},{"k":"concours","l":"Jeux concours","c":"#4D7C0F"}],"items":[{"id":"i1","cat":"event","brand":"Black Friday 2026","code":"","status":"deal","when":"27 nov. 2026","desc":"Le Black Friday tombe le vendredi 27 novembre, le Cyber Monday le lundi 30. Beaucoup d'enseignes lancent leur Black Week bien avant.","url":"https://www.clubic.com/black-friday/","src":"Clubic"},{"id":"i2","cat":"vpn","brand":"NordVPN","code":"JDGMEDIA","status":"verified","when":"Relevé en nov. 2026","desc":"Réduction sur les forfaits 28 mois. Code du Journal du Geek.","url":"https://www.journaldugeek.com/vpn/nordvpn/code-promo/","src":"Journal du Geek"},{"id":"i3","cat":"vpn","brand":"ExpressVPN","code":"JOURNALDUGEEK","status":"verified","when":"Relevé en nov. 2026","desc":"Jusqu'à -80 % sur les forfaits 15 et 28 mois.","url":"https://www.journaldugeek.com/vpn/expressvpn/code-promo/","src":"Journal du Geek"},{"id":"i4","cat":"vpn","brand":"Surfshark","code":"","status":"deal","when":"Black Friday 2026","desc":"L'abonnement One sur 2 ans au même prix que l'offre Starter, selon iGraal. Aucun code à entrer.","url":"https://fr.igraal.com/black-november","src":"iGraal"},{"id":"i5","cat":"youtube","brand":"NordVPN × Philip DeFranco","code":"PHIL","status":"check","when":"","desc":"Code cité dans ses vidéos. Les sponsors changent d'une semaine à l'autre.","url":"https://pcrisk.com/blog/tips/14039-nordvpn-youtuber-discount-codes","src":"PCrisk"},{"id":"i6","cat":"youtube","brand":"NordVPN × Harry Mack","code":"HARRYMACK","status":"check","when":"","desc":"Code cité dans les descriptions de ses vidéos.","url":"https://pcrisk.com/blog/tips/14039-nordvpn-youtuber-discount-codes","src":"PCrisk"},{"id":"i7","cat":"youtube","brand":"NordVPN × Julien Bam","code":"JULIENBAM","status":"check","when":"","desc":"Repéré dans des listes 2026, fiabilité moyenne.","url":"https://pcrisk.com/blog/tips/14039-nordvpn-youtuber-discount-codes","src":"PCrisk"},{"id":"i8","cat":"food","brand":"Uber Eats","code":"eats-neozone","status":"check","when":"","desc":"15 € de réduction sur une première commande, pour les nouveaux clients. Date de l'offre inconnue.","url":"https://www.neozone.org/bon-plan/code-promo-uber-eats-vous-offre-15-euros-de-reduction-pour-votre-premiere-commande","src":"NeoZone"},{"id":"i9","cat":"mode","brand":"Zalando","code":"","status":"deal","when":"Black Friday 2026","desc":"Super Sale prévue pendant le Black Friday. Les membres Zalando Plus accèdent aux soldes 24 h avant les autres.","url":"https://www.vitepromo.com/mode-beaute/code-promo-zalando","src":"Vitepromo"},{"id":"i10","cat":"shop","brand":"AliExpress","code":"","status":"deal","when":"Black November","desc":"13 € de remise et 18 % de cashback en passant par iGraal.","url":"https://fr.igraal.com/black-november","src":"iGraal"}]}</script>
+
+<script id="app-js">
+var FONTLINK='<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@500&display=swap">';
+var FALLBACK_RESET=':root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}';
+var DEFAULT_LOGO='<svg viewBox="0 0 124 112" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PromoZip"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9A8CFF"/><stop offset="1" stop-color="#4F46E5"/></linearGradient></defs><g transform="rotate(-18 62 64)"><path d="M26 34Q26 26 34 26L76 26L98 48L98 90Q98 98 90 98L34 98Q26 98 26 90Z" fill="url(#lg)"/><circle cx="83" cy="40" r="4.5" fill="#1A1240"/><path d="M16 64A46 14 0 0 1 108 64" fill="none" stroke="#FFC21A" stroke-width="6" stroke-linecap="round"/><g transform="skewX(-8) translate(8 0)"><path fill-rule="evenodd" fill="#FFFFFF" d="M42 40H66Q82 40 82 55Q82 69 66 69H57V94H42ZM57 52H65Q69 52 69 56Q69 60 65 60H57Z"/></g><path d="M16 64A46 14 0 0 0 108 64" fill="none" stroke="#FFC21A" stroke-width="6" stroke-linecap="round"/></g><path d="M96 22L102 10M106 32L118 27" fill="none" stroke="#FFC21A" stroke-width="5.5" stroke-linecap="round"/></svg>';
+var PALETTE=['#4F46E5','#6D28D9','#C026A3','#E11D48','#C2570C','#A16207','#4D7C0F','#15803D','#0F766E','#0369A1','#1D4ED8','#334155'];
+var STATUS={verified:'Vérifié',check:'À tester',deal:'Bon plan'};
+
+var STATE=JSON.parse(document.getElementById('state').textContent);
+var BASE=JSON.stringify(STATE);
+var SHELL=document.getElementById('shell').outerHTML;
+var APPJS=document.getElementById('app-js').textContent;
+var activeCat='all',isAdmin=false,adminTab='codes',editing=null,adminQ='',adminCat='',fid=0;
+var ui={};
+
+function $(id){return document.getElementById(id)}
+function h(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function uid(){return 'i'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+function catOf(k){for(var i=0;i<STATE.cats.length;i++)if(STATE.cats[i].k===k)return STATE.cats[i];return {k:'',l:'Autre',c:'#475569'}}
+function safeUrl(u){try{var x=new URL(u);return(x.protocol==='https:'||x.protocol==='http:')?x.href:null}catch(e){return null}}
+function dirty(){return JSON.stringify(STATE)!==BASE}
+function visibleItems(){
+  var l=STATE.items.filter(function(i){return !i.hidden});
+  return l.filter(function(i){return i.pin}).concat(l.filter(function(i){return !i.pin}));
+}
+
+/* ---------- Public site ---------- */
+function copyCode(codeEl,label){
+  var code=codeEl.textContent;
+  function done(){label.textContent='Copié ✓';setTimeout(function(){label.textContent='Copier'},1600)}
+  function fallback(){try{var r=document.createRange();r.selectNodeContents(codeEl);var s=getSelection();s.removeAllRanges();s.addRange(r);label.textContent='Sélectionné'}catch(e){}}
+  try{navigator.clipboard.writeText(code).then(done,fallback)}catch(e){fallback()}
+}
+function ticket(it){
+  var c=catOf(it.cat),t=h('article','ticket');t.style.setProperty('--cat',c.c);
+  var stub=h('div','stub');stub.appendChild(h('div','mono',(it.brand||'?').trim().charAt(0).toUpperCase()));stub.appendChild(h('div','catl',c.l));
+  var b=h('div','tbody');b.appendChild(h('h3',null,it.brand));
+  if(it.desc)b.appendChild(h('p',null,it.desc));
+  if(it.code){
+    var btn=h('button','codebtn');btn.type='button';btn.setAttribute('aria-label','Copier le code '+it.code);
+    var ct=h('span','codetext',it.code),cp=h('span','copy','Copier');btn.appendChild(ct);btn.appendChild(cp);
+    btn.addEventListener('click',function(){copyCode(ct,cp)});b.appendChild(btn);
+  }
+  var u=safeUrl(it.url);
+  if(!it.code&&u){var go=h('a','go','Voir l\'offre');go.href=u;go.target='_blank';go.rel='noopener noreferrer';b.appendChild(go)}
+  var m=h('div','meta');m.appendChild(h('span','pill '+(it.status||'check'),STATUS[it.status]||STATUS.check));
+  if(it.when)m.appendChild(h('span',null,it.when));
+  if(u&&it.code){var a=h('a',null,'Source'+(it.src?' : '+it.src:''));a.href=u;a.target='_blank';a.rel='noopener noreferrer';m.appendChild(a)}
+  b.appendChild(m);t.appendChild(stub);t.appendChild(b);return t;
+}
+function logoNode(){
+  var s=STATE.site.logo;
+  if(s&&/^data:image\//.test(s)){var i=document.createElement('img');i.src=s;i.alt='';return i}
+  var w=document.createElement('span');w.innerHTML=DEFAULT_LOGO;return w.firstChild;
+}
+function autoSticker(){
+  var now=new Date(),t0=new Date(now.getFullYear(),now.getMonth(),now.getDate()),bf=new Date(2026,10,27),cm=new Date(2026,10,30);
+  var d=Math.round((bf-t0)/864e5);
+  if(d>1)return 'Black Friday dans '+d+' jours';
+  if(d===1)return 'Black Friday demain';
+  if(d===0)return 'Black Friday, c\'est aujourd\'hui';
+  if(t0<=cm)return 'Cyber Monday le 30 novembre';
+  return 'Codes mis à jour régulièrement';
+}
+function renderSite(){
+  var S=STATE.site;
+  $('brand').textContent=S.name;$('h-a').textContent=S.heroA;$('h-b').textContent=S.heroB;$('intro').textContent=S.intro;
+  $('countdown').textContent=S.sticker||autoSticker();
+  var lg=$('logo');lg.textContent='';lg.appendChild(logoNode());
+  $('foot').textContent=(S.footer||'')+(S.updated?' Dernier relevé : '+S.updated+'.':'');
+
+  if(activeCat!=='all'&&!STATE.cats.some(function(c){return c.k===activeCat}))activeCat='all';
+  var list=visibleItems(),q=$('q').value.trim().toLowerCase(),only=$('only-codes').checked;
+  var counts={};list.forEach(function(i){counts[i.cat]=(counts[i.cat]||0)+1});
+  var chips=$('chips');chips.textContent='';
+  function chip(k,l,n,color){var b=h('button','chip');b.type='button';b.setAttribute('aria-pressed',String(activeCat===k));
+    if(color){var d=h('i');d.style.setProperty('--cat',color);b.appendChild(d)}
+    b.appendChild(document.createTextNode(l+' '));b.appendChild(h('b',null,String(n)));
+    b.addEventListener('click',function(){activeCat=k;renderSite()});chips.appendChild(b)}
+  chip('all','Tout',list.length);
+  STATE.cats.forEach(function(c){chip(c.k,c.l,counts[c.k]||0,c.c)});
+  var shown=list.filter(function(i){
+    if(activeCat!=='all'&&i.cat!==activeCat)return false;
+    if(only&&!i.code)return false;
+    if(q&&((i.brand||'')+' '+(i.code||'')+' '+(i.desc||'')).toLowerCase().indexOf(q)<0)return false;
+    return true});
+  var g=$('grid');g.textContent='';
+  if(!shown.length){var e=h('div','empty');
+    e.appendChild(h('h3',null,activeCat==='all'?'Aucun code pour l\'instant':'Rien dans cette catégorie pour l\'instant'));
+    e.appendChild(h('p',null,'Reviens bientôt, ou essaie une autre catégorie.'));g.appendChild(e)}
+  shown.forEach(function(i){g.appendChild(ticket(i))});
+  $('stat-codes').textContent=list.filter(function(i){return i.code}).length+' codes';
+  $('stat-deals').textContent=list.filter(function(i){return !i.code}).length+' bons plans';
+}
+$('q').addEventListener('input',renderSite);$('only-codes').addEventListener('change',renderSite);
+
+/* ---------- Admin helpers ---------- */
+function btn(label,cls,fn,aria){var b=h('button','ab '+(cls||''),label);b.type='button';if(aria)b.setAttribute('aria-label',aria);b.addEventListener('click',fn);return b}
+function inp(type,val,ph,max){var i=document.createElement('input');i.type=type;i.value=val||'';if(ph)i.placeholder=ph;if(max)i.maxLength=max;i.autocomplete='off';return i}
+function field(label,control,wide){var f=h('div','field'+(wide?' wide':''));var id='f'+(++fid);control.id=id;var l=h('label',null,label);l.htmlFor=id;f.appendChild(l);f.appendChild(control);return f}
+function sel(options,val){var s=document.createElement('select');options.forEach(function(o){var op=document.createElement('option');op.value=o[0];op.textContent=o[1];s.appendChild(op)});s.value=val;return s}
+function catOptions(){return STATE.cats.map(function(c){return [c.k,c.l]})}
+function arm(b,label,action){var armed=false,t;b.addEventListener('click',function(){
+  if(!armed){armed=true;b.textContent='Confirmer ?';t=setTimeout(function(){armed=false;b.textContent=label},3000);return}
+  clearTimeout(t);armed=false;action()})}
+function say(t){if(ui.msg)ui.msg.textContent=t||''}
+function changed(){renderSite();updateBar()}
+function updateBar(){
+  if(!ui.fab)return;var d=dirty();
+  ui.dot.hidden=!d;ui.status.textContent=d?'Modifications non publiées':'Tout est publié';ui.status.className='status'+(d?' dirty':'');
+  ui.pub.disabled=!d;ui.cancel.disabled=!d;
+}
+function closePanel(){ui.panel.hidden=true;ui.fab.hidden=false;ui.fab.focus()}
+function openPanel(){ui.panel.hidden=false;ui.fab.hidden=true;renderPanel();ui.close.focus()}
+
+/* Connexion admin : l'accès réel reste réservé au compte propriétaire (canEdit + droit de publier). Ce formulaire ajoute une étape. */
+async function sha(s){var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return [].map.call(new Uint8Array(b),function(x){return x.toString(16).padStart(2,'0')}).join('')}
+function authHash(id,pw){return sha(STATE.auth.salt+':'+id.trim().toLowerCase()+':'+pw)}
+function unlocked(){try{return sessionStorage.getItem('pl-admin')==='1'}catch(e){return false}}
+function setUnlocked(v){try{if(v)sessionStorage.setItem('pl-admin','1');else sessionStorage.removeItem('pl-admin')}catch(e){}}
+function showLogin(){
+  var back=h('div','login-back'),box=h('form','login');box.setAttribute('role','dialog');box.setAttribute('aria-modal','true');box.setAttribute('aria-label','Connexion admin');box.noValidate=true;
+  var lg=h('span','logo');lg.style.background='var(--hero)';lg.style.borderRadius='14px';lg.style.padding='6px';lg.appendChild(logoNode());box.appendChild(lg);
+  box.appendChild(h('h2',null,'Connexion admin'));box.appendChild(h('p',null,'Entre ton identifiant et ton mot de passe pour ouvrir le menu.'));
+  var id=inp('text','','Identifiant',60);id.autocomplete='username';var pw=inp('password','','Mot de passe',100);pw.autocomplete='current-password';
+  box.appendChild(field('Identifiant',id));box.appendChild(field('Mot de passe',pw));
+  var err=h('p','ad-msg');err.setAttribute('role','alert');err.style.color='var(--danger)';box.appendChild(err);
+  var row=h('div','login-row');var ok=btn('Se connecter','pri',function(){});ok.type='submit';
+  var no=btn('Annuler','',function(){back.remove();ui.fab.focus()});row.appendChild(ok);row.appendChild(no);box.appendChild(row);
+  box.addEventListener('submit',async function(e){
+    e.preventDefault();ok.disabled=true;err.textContent='';
+    try{
+      if(!(window.crypto&&crypto.subtle)){err.textContent='Connexion indisponible dans ce navigateur.';return}
+      var hh=await authHash(id.value,pw.value);
+      if(hh===STATE.auth.h){setUnlocked(true);back.remove();openPanel()}
+      else{await new Promise(function(r){setTimeout(r,700)});err.textContent='Identifiant ou mot de passe incorrect.';pw.value='';pw.focus()}
+    }catch(x){err.textContent='Connexion impossible. Réessaie.'}
+    finally{ok.disabled=false}
+  });
+  back.addEventListener('keydown',function(e){if(e.key==='Escape'){back.remove();ui.fab.focus()}});
+  back.appendChild(box);document.body.appendChild(back);id.focus();
+}
+
+/* ---------- Publish ---------- */
+function buildDoc(){
+  var rs=[].slice.call(document.head.querySelectorAll('style')).filter(function(s){return s.id!=='app-css'})[0];
+  var reset=rs?rs.textContent:FALLBACK_RESET;
+  var json=JSON.stringify(STATE).replace(/</g,'\\u003c');
+  var content='<title>'+esc(STATE.site.name)+'</title>\n<meta name="claude:viewport-fit-sides" content="cover">\n'+FONTLINK+'\n<style id="app-css">'+$('app-css').textContent+'</style>\n'+SHELL+'\n<script type="application/json" id="state">'+json+'<\/script>\n<script id="app-js">'+APPJS+'<\/script>';
+  return '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>'+reset+'</style></head><body>'+content+'</body></html>';
+}
+async function doPublish(){
+  say('Publication en cours…');ui.pub.disabled=true;
+  try{
+    var art=await claude.use('artifact');
+    if(!art){say('Publication indisponible dans cette vue.');updateBar();return}
+    await art.publish(buildDoc());
+    say('Publié ✓ La page se recharge.');
+  }catch(e){
+    var c=e&&e.code;
+    say(c==='conflict'?'Une version plus récente existe déjà. La page se recharge, refais ta modification.':
+        c==='too_large'?'Page trop lourde. Importe un logo plus petit.':
+        (c==='not_writer'||c==='not_granted')?'Tu n\'as pas le droit de publier cette page.':
+        'Publication impossible. Réessaie dans un instant.');
+    updateBar();
+  }
+}
+
+/* ---------- Admin panel ---------- */
+function buildAdmin(){
+  var root=h('div');root.id='adminroot';document.body.appendChild(root);
+  var fab=h('button','fab');fab.type='button';fab.setAttribute('aria-label','Ouvrir l\'espace admin');
+  fab.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>';
+  fab.appendChild(h('span',null,'Admin'));var dot=h('span','dot');dot.hidden=true;fab.appendChild(dot);
+  fab.addEventListener('click',function(){if(unlocked())openPanel();else showLogin()});root.appendChild(fab);
+  var panel=h('div','panel');panel.hidden=true;panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');panel.setAttribute('aria-label','Espace admin');
+  var head=h('div','p-head');var t=h('h2');var lg=h('span','logo');lg.appendChild(logoNode());t.appendChild(lg);t.appendChild(document.createTextNode('Espace admin'));head.appendChild(t);
+  var acts=h('div','p-actions');var status=h('span','status','Tout est publié');
+  var pub=btn('Publier','pri',doPublish);var cancel=btn('Annuler les changements','',function(){STATE=JSON.parse(BASE);editing=null;say('Changements annulés.');renderSite();updateBar();renderPanel()});
+  var close=btn('Fermer','',closePanel);var out=btn('Se déconnecter','',function(){setUnlocked(false);closePanel()});
+  acts.appendChild(status);acts.appendChild(cancel);acts.appendChild(pub);acts.appendChild(close);acts.appendChild(out);head.appendChild(acts);
+  var tabs=h('div','tabs');tabs.setAttribute('role','tablist');
+  [['codes','Codes'],['cats','Catégories'],['site','Site & logo'],['help','Aide']].forEach(function(x){
+    var b=h('button','tab',x[1]);b.type='button';b.setAttribute('role','tab');b.dataset.tab=x[0];
+    b.addEventListener('click',function(){adminTab=x[0];editing=null;renderPanel()});tabs.appendChild(b)});
+  var body=h('div','p-body');var inner=h('div','p-inner');var msg=h('p','ad-msg');msg.setAttribute('role','status');var content=h('div');content.style.display='contents';
+  inner.appendChild(msg);inner.appendChild(content);body.appendChild(inner);
+  panel.appendChild(head);panel.appendChild(tabs);panel.appendChild(body);root.appendChild(panel);
+  ui={fab:fab,dot:dot,panel:panel,status:status,pub:pub,cancel:cancel,close:close,tabs:tabs,msg:msg,content:content,body:body};
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!ui.panel.hidden)closePanel()});
+  updateBar();
+}
+function renderPanel(){
+  [].forEach.call(ui.tabs.children,function(b){b.setAttribute('aria-selected',String(b.dataset.tab===adminTab))});
+  ui.content.textContent='';
+  ({codes:renderCodes,cats:renderCats,site:renderSiteTab,help:renderHelp})[adminTab](ui.content);
+}
+
+/* Codes tab */
+var listBox=null;
+function renderCodes(box){
+  if(editing!==null){box.appendChild(codeForm(editing==='new'?null:editing));return}
+  var bar=h('div','ad-bar');
+  var q=inp('search',adminQ,'Chercher dans mes codes…');q.className='search2 grow';q.setAttribute('aria-label','Chercher dans mes codes');
+  q.addEventListener('input',function(){adminQ=q.value;renderList()});
+  var cf=sel([['','Toutes les catégories']].concat(catOptions()),adminCat);cf.className='search2';cf.style.width='auto';cf.setAttribute('aria-label','Filtrer par catégorie');
+  cf.addEventListener('change',function(){adminCat=cf.value;renderList()});
+  bar.appendChild(q);bar.appendChild(cf);bar.appendChild(btn('+ Ajouter un code','pri',function(){editing='new';renderPanel()}));
+  box.appendChild(bar);listBox=h('div','ad-list');box.appendChild(listBox);renderList();
+}
+function filteredIds(){
+  var q=adminQ.trim().toLowerCase();
+  return STATE.items.filter(function(i){
+    if(adminCat&&i.cat!==adminCat)return false;
+    return !q||((i.brand||'')+' '+(i.code||'')+' '+(i.desc||'')).toLowerCase().indexOf(q)>=0}).map(function(i){return i.id});
+}
+function move(id,dir){
+  var ids=filteredIds(),k=ids.indexOf(id),n=ids[k+dir];if(n==null)return;
+  var a=STATE.items.findIndex(function(i){return i.id===id}),b=STATE.items.findIndex(function(i){return i.id===n});
+  var tmp=STATE.items[a];STATE.items[a]=STATE.items[b];STATE.items[b]=tmp;changed();renderList();
+}
+function renderList(){
+  if(!listBox)return;listBox.textContent='';
+  var ids=filteredIds();
+  if(!ids.length){var e=h('div','card');e.appendChild(h('h3',null,STATE.items.length?'Aucun résultat':'Aucun code pour l\'instant'));e.appendChild(h('p',null,'Utilise « Ajouter un code » pour créer le premier.'));listBox.appendChild(e);return}
+  ids.forEach(function(id,idx){
+    var it=STATE.items.filter(function(x){return x.id===id})[0],c=catOf(it.cat);
+    var row=h('div','ad-row'+(it.hidden?' off':''));
+    var dot=h('span','ad-dot');dot.style.background=c.c;row.appendChild(dot);
+    var main=h('div','ad-main');main.appendChild(h('strong',null,it.brand));
+    if(it.code)main.appendChild(h('span','c',it.code));
+    if(it.desc)main.appendChild(h('span','d',it.desc));
+    var tags=h('div','ad-tags');tags.appendChild(h('span','pill '+(it.status||'check'),STATUS[it.status]||STATUS.check));
+    tags.appendChild(h('span','d',c.l));if(it.pin)tags.appendChild(h('span','pill deal','Épinglé'));if(it.hidden)tags.appendChild(h('span','pill check','Masqué'));
+    main.appendChild(tags);row.appendChild(main);
+    var a=h('div','ad-actions');
+    a.appendChild(btn('Modifier','solid',function(){editing=it;renderPanel()}));
+    a.appendChild(btn(it.hidden?'Afficher':'Masquer','',function(){it.hidden=!it.hidden;changed();renderList()}));
+    a.appendChild(btn(it.pin?'Désépingler':'Épingler en haut','',function(){it.pin=!it.pin;changed();renderList()}));
+    a.appendChild(btn('Dupliquer','',function(){var cp=JSON.parse(JSON.stringify(it));cp.id=uid();cp.brand=it.brand+' (copie)';STATE.items.splice(STATE.items.indexOf(it)+1,0,cp);changed();renderList()}));
+    var up=btn('↑','',function(){move(id,-1)},'Monter');up.disabled=idx===0;var dn=btn('↓','',function(){move(id,1)},'Descendre');dn.disabled=idx===ids.length-1;
+    a.appendChild(up);a.appendChild(dn);
+    var del=btn('Supprimer','danger',function(){});arm(del,'Supprimer',function(){STATE.items.splice(STATE.items.indexOf(it),1);changed();renderList()});a.appendChild(del);
+    row.appendChild(a);listBox.appendChild(row);
+  });
+}
+function codeForm(it){
+  var d=it||{brand:'',code:'',cat:STATE.cats[0]?STATE.cats[0].k:'',status:'verified',when:'',desc:'',url:'',src:'',pin:false,hidden:false};
+  var card=h('div','card');card.appendChild(h('h3',null,it?'Modifier ce code':'Ajouter un code'));
+  var f=h('form','form');f.noValidate=true;
+  var brand=inp('text',d.brand,'Ex : Nike',80),code=inp('text',d.code,'Ex : BIENVENUE10 (vide pour un bon plan)',60);
+  var cat=sel(catOptions(),d.cat),st=sel([['verified','Vérifié'],['check','À tester'],['deal','Bon plan sans code']],d.status);
+  var when=inp('text',d.when,'Ex : Jusqu\'au 30 nov.',60),src=inp('text',d.src,'Ex : Dealabs',60);
+  var desc=document.createElement('textarea');desc.value=d.desc||'';desc.maxLength=300;desc.placeholder='Ex : 10 % sur la première commande dès 50 €';
+  var url=inp('url',d.url,'https://…',300);
+  f.appendChild(field('Marque ou chaîne',brand));f.appendChild(field('Code',code));f.appendChild(field('Catégorie',cat));f.appendChild(field('Statut',st));
+  f.appendChild(field('Validité',when));f.appendChild(field('Source (nom)',src));f.appendChild(field('Description',desc,true));f.appendChild(field('Lien',url,true));
+  var checks=h('div','checks');var pin=document.createElement('input');pin.type='checkbox';pin.checked=!!d.pin;var hid=document.createElement('input');hid.type='checkbox';hid.checked=!!d.hidden;
+  var l1=h('label');l1.appendChild(pin);l1.appendChild(document.createTextNode('Épingler en haut'));var l2=h('label');l2.appendChild(hid);l2.appendChild(document.createTextNode('Masquer sur le site'));
+  checks.appendChild(l1);checks.appendChild(l2);var cw=h('div','field wide');cw.appendChild(checks);f.appendChild(cw);
+  var m=h('p','ad-msg');m.setAttribute('role','alert');var bw=h('div','field wide');bw.style.flexDirection='row';bw.style.gap='8px';
+  var save=btn(it?'Enregistrer':'Ajouter','pri',function(){
+    var b=brand.value.trim(),c=code.value.trim(),u=url.value.trim();
+    if(!b){m.textContent='Indique la marque.';brand.focus();return}
+    if(!c&&!u){m.textContent='Ajoute un code ou un lien.';return}
+    if(u&&!safeUrl(u)){m.textContent='Le lien doit commencer par https://';url.focus();return}
+    var data={brand:b,code:c,cat:cat.value,status:c?st.value:'deal',when:when.value.trim(),desc:desc.value.trim(),url:u,src:src.value.trim(),pin:pin.checked,hidden:hid.checked};
+    if(it)Object.assign(it,data);else{data.id=uid();STATE.items.unshift(data)}
+    editing=null;say(it?'Code modifié.':'Code ajouté.');changed();renderPanel();
+  });
+  save.type='submit';bw.appendChild(save);bw.appendChild(btn('Annuler','',function(){editing=null;renderPanel()}));f.appendChild(bw);
+  f.addEventListener('submit',function(e){e.preventDefault()});
+  card.appendChild(f);card.appendChild(m);return card;
+}
+
+/* Categories tab */
+function paletteRow(current,onPick){
+  var p=h('div','palette');
+  PALETTE.forEach(function(col){var s=h('button','swatch');s.type='button';s.style.background=col;s.setAttribute('aria-label','Couleur '+col);s.setAttribute('aria-pressed',String(col.toLowerCase()===String(current).toLowerCase()));
+    s.addEventListener('click',function(){[].forEach.call(p.children,function(o){o.setAttribute('aria-pressed','false')});s.setAttribute('aria-pressed','true');onPick(col)});p.appendChild(s)});
+  return p;
+}
+function renderCats(box){
+  box.appendChild(h('p','hint','Renomme, recolore, réordonne ou supprime tes catégories. Elles s\'affichent dans cet ordre sur le site.'));
+  var list=h('div','ad-list');
+  STATE.cats.forEach(function(c,i){
+    var n=STATE.items.filter(function(x){return x.cat===c.k}).length;
+    var row=h('div','ad-row cat-row');
+    var sw=h('button','swatch');sw.type='button';sw.style.background=c.c;sw.setAttribute('aria-label','Changer la couleur de '+c.l);row.appendChild(sw);
+    var main=h('div','ad-main');var nm=inp('text',c.l,'Nom',40);nm.className='nm';nm.setAttribute('aria-label','Nom de la catégorie');
+    nm.addEventListener('input',function(){c.l=nm.value;changed()});nm.addEventListener('change',function(){if(!nm.value.trim()){c.l='Sans nom';nm.value=c.l;changed()}});
+    main.appendChild(nm);main.appendChild(h('span','d',n+(n>1?' codes':' code')));row.appendChild(main);
+    var pal=paletteRow(c.c,function(col){c.c=col;sw.style.background=col;changed()});pal.hidden=true;
+    sw.addEventListener('click',function(){pal.hidden=!pal.hidden});
+    var a=h('div','ad-actions');
+    var up=btn('↑','',function(){var t=STATE.cats[i];STATE.cats[i]=STATE.cats[i-1];STATE.cats[i-1]=t;changed();renderPanel()},'Monter');up.disabled=i===0;
+    var dn=btn('↓','',function(){var t=STATE.cats[i];STATE.cats[i]=STATE.cats[i+1];STATE.cats[i+1]=t;changed();renderPanel()},'Descendre');dn.disabled=i===STATE.cats.length-1;
+    a.appendChild(up);a.appendChild(dn);
+    var del=btn('Supprimer','danger',function(){});del.disabled=STATE.cats.length<2;
+    arm(del,'Supprimer',function(){
+      var other=STATE.cats.filter(function(x){return x!==c})[0];
+      STATE.items.forEach(function(x){if(x.cat===c.k)x.cat=other.k});
+      STATE.cats.splice(STATE.cats.indexOf(c),1);say(n?n+' code(s) déplacé(s) vers « '+other.l+' ».':'Catégorie supprimée.');changed();renderPanel()});
+    a.appendChild(del);row.appendChild(pal);row.appendChild(a);list.appendChild(row);
+  });
+  box.appendChild(list);
+  var card=h('div','card');card.appendChild(h('h3',null,'Ajouter une catégorie'));
+  var picked=PALETTE[STATE.cats.length%PALETTE.length];var name=inp('text','','Ex : Abonnements',40);
+  card.appendChild(field('Nom',name));card.appendChild(paletteRow(picked,function(col){picked=col}));
+  card.appendChild(btn('Ajouter la catégorie','pri',function(){
+    var v=name.value.trim();if(!v){say('Donne un nom à la catégorie.');name.focus();return}
+    var k=(v.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'cat')+'-'+Math.random().toString(36).slice(2,5);
+    STATE.cats.push({k:k,l:v,c:picked});say('Catégorie ajoutée.');changed();renderPanel()}));
+  box.appendChild(card);
+}
+
+/* Site tab */
+function renderSiteTab(box){
+  var S=STATE.site;
+  var card=h('div','card');card.appendChild(h('h3',null,'Textes du site'));
+  var f=h('div','form');
+  function bind(label,key,tag,wide,ph){var c=tag==='ta'?document.createElement('textarea'):inp('text',S[key],ph,300);if(tag==='ta')c.value=S[key]||'';
+    c.addEventListener('input',function(){S[key]=c.value;changed()});f.appendChild(field(label,c,wide));return c}
+  bind('Nom du site','name','',false,'PromoZip');bind('Titre, première partie','heroA','',false);bind('Titre, partie surlignée','heroB','',false);
+  bind('Texte d\'introduction','intro','ta',true);
+  bind('Autocollant jaune','sticker','',true,'Vide = compte à rebours Black Friday automatique');
+  bind('Note en bas de page','footer','ta',true);
+  var up=bind('Date du dernier relevé','updated','',false,'Ex : 19 novembre 2026');
+  var td=btn('Mettre la date d\'aujourd\'hui','',function(){var v=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});S.updated=v;up.value=v;changed()});
+  var tw=h('div','field');tw.style.justifyContent='flex-end';tw.appendChild(td);f.appendChild(tw);
+  card.appendChild(f);box.appendChild(card);
+  var lc=h('div','card');lc.appendChild(h('h3',null,'Logo'));lc.appendChild(h('p',null,'Importe ton propre logo (PNG, JPG, SVG ou WebP). Il est réduit automatiquement pour rester léger.'));
+  var pr=h('div','logo-prev');var pv=h('span','logo');pv.appendChild(logoNode());pr.appendChild(pv);
+  var file=document.createElement('input');file.type='file';file.accept='image/*';file.setAttribute('aria-label','Importer un logo');
+  file.addEventListener('change',function(){
+    var fl=file.files&&file.files[0];if(!fl)return;
+    var rd=new FileReader();rd.onerror=function(){say('Lecture du fichier impossible.')};
+    rd.onload=function(){var im=new Image();im.onerror=function(){say('Image illisible.')};
+      im.onload=function(){var mx=320,sc=Math.min(1,mx/Math.max(im.width,im.height)),cv=document.createElement('canvas');cv.width=Math.max(1,Math.round(im.width*sc));cv.height=Math.max(1,Math.round(im.height*sc));
+        cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);var out=cv.toDataURL('image/png');if(out.length>400000)out=cv.toDataURL('image/jpeg',.85);
+        if(out.length>600000){say('Logo trop lourd. Choisis une image plus simple.');return}
+        S.logo=out;say('Logo importé.');changed();renderPanel()};im.src=rd.result};
+    rd.readAsDataURL(fl)});
+  pr.appendChild(file);lc.appendChild(pr);
+  lc.appendChild(btn('Revenir au logo PromoZip','',function(){S.logo='';say('Logo par défaut rétabli.');changed();renderPanel()}));
+  box.appendChild(lc);
+  var ac=h('div','card');ac.appendChild(h('h3',null,'Identifiants admin'));ac.appendChild(h('p',null,'Change ton identifiant et ton mot de passe. Ils sont enregistrés sous forme d\'empreinte, jamais en clair.'));
+  var nid=inp('text','','Nouvel identifiant',60),npw=inp('password','','Nouveau mot de passe (8 caractères minimum)',100);npw.autocomplete='new-password';
+  var af=h('div','form');af.appendChild(field('Nouvel identifiant',nid));af.appendChild(field('Nouveau mot de passe',npw));ac.appendChild(af);
+  ac.appendChild(btn('Changer mes identifiants','',async function(){
+    if(!nid.value.trim()){say('Indique un identifiant.');return}
+    if(npw.value.length<8){say('Le mot de passe doit faire 8 caractères minimum.');return}
+    if(!(window.crypto&&crypto.subtle)){say('Indisponible dans ce navigateur.');return}
+    STATE.auth.h=await authHash(nid.value,npw.value);nid.value='';npw.value='';say('Identifiants modifiés. Publie pour les enregistrer.');updateBar()}));
+  box.appendChild(ac);
+}
+
+/* Help tab */
+function renderHelp(box){
+  var c=h('div','card help');c.appendChild(h('h3',null,'Comment ça marche'));
+  var ul=h('ul');
+  ['Tout ce que tu modifies ici s\'affiche tout de suite dans ton aperçu, mais reste privé tant que tu n\'as pas cliqué sur « Publier ».',
+   '« Publier » met la nouvelle version en ligne pour tous les visiteurs. La page se recharge ensuite.',
+   '« Annuler les changements » revient à la dernière version publiée.',
+   'Ce bouton Admin n\'apparaît que pour toi. Les visiteurs ne le voient jamais.'].forEach(function(t){ul.appendChild(h('li',null,t))});
+  c.appendChild(ul);box.appendChild(c);
+  var s=h('div','card help');s.appendChild(h('h3',null,'Rendre le site public'));
+  var ul2=h('ul');
+  ['Ouvre le menu Partager de cette page, en haut de l\'application.',
+   'Choisis l\'accès par lien pour que toute personne qui a le lien puisse la voir, sans compte.',
+   'Copie le lien et envoie-le : c\'est l\'adresse de ton site.'].forEach(function(t){ul2.appendChild(h('li',null,t))});
+  s.appendChild(ul2);box.appendChild(s);
+}
+
+/* ---------- Boot ---------- */
+renderSite();
+(async function(){
+  try{
+    if(!window.claude||!claude.use)return;
+    var user=await claude.use('user');
+    isAdmin=!!(user&&(await user.canEdit()));
+    if(!isAdmin)return;
+    var art=await claude.use('artifact');
+    if(art)buildAdmin();
+  }catch(err){}
+})();
+</script>
+
+</body>
+</html>
